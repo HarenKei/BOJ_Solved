@@ -1,11 +1,5 @@
 #include <iostream>
 
-<<<<<<< HEAD
-int main(){
-    int passenger[10];
-
-    
-=======
 using namespace std;
 
 int main() {
@@ -27,5 +21,4 @@ int main() {
     cout << max << endl;
 
     return 0;
->>>>>>> e0bb532887d79ecf1ee6759753e7037518a69ed4
 }
