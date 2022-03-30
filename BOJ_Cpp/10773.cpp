@@ -23,9 +23,9 @@ int main(){
             sum -= money.back();
             money.pop_back();
         }
-
-    
     }
- 
+    
     cout << sum << endl;
+    
+    return 0;
 }
