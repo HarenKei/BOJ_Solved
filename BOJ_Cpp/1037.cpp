@@ -16,6 +16,8 @@ int main(){
         cin >> num;
         measure.push_back(num);
     }
+    int maxMeas = *max_element(measure.begin(),measure.end());
+    int minMeas = *min_element(measure.begin(), measure.end());
 
-    cout << measure[0] * measure[countMeas-1] << endl;
+    cout << maxMeas * minMeas << endl;
 }
