@@ -8,33 +8,33 @@ int main(){
     cout.tie(NULL);
 
     stack<int> st;
-    string pnm;
-    int cnt = 1;
+    vector<int> pnm;
+    int cnt = 0;
     int nCase;
     cin >> nCase;
     
-    int k = nCase;
+    for(int i = 0; i < nCase; i++){
+        int nNum;
+        cin >> nNum;
 
-    while(k--){
-        int num;
-        cin >> num;
-
-        while(cnt <= num){
-                st.push(cnt);
+        if(nNum >= cnt){
+            int cnt2 = cnt;
+            for(int j = cnt2+1; j <= nNum; j++){
+                st.push(j);
                 cnt++;
-                pnm += '+';
-            
-        } if(st.top() == num){
+                pnm.push_back('+');
+            }
+        } if(nNum == st.top()){
             st.pop();
-            pnm += '-';
+            pnm.push_back('-');
         } else{
             cout << "NO" << '\n';
             return 0;
         }
     }
 
-    for(int i = 0; i < pnm.length(); i++){
-        cout << pnm[i] << '\n';
+    for(int i = 0; i < pnm.size(); i++){
+        cout << (char)pnm[i] << '\n';
     }
 
     return 0;
