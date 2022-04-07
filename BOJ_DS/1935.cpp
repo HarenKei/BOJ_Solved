@@ -14,48 +14,36 @@ int main(){
 
     cin >> n;
     cin >> str;
+
     
 
     for(int i = 0; i < n; i++){
         double num;
         cin >> num;
-        //vec.push_back(num);
-    
+        vec.push_back(num);
+    }
 
-    for(int j = 0; j < str.length(); j++){
-        if (str[j] == '+' || str[j] == '-' || str[j] == '*' || str[j] == '/'){
-            double b = st.top();
+    for(int i = 0; i < str.length(); i++){
+        if(str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/'){
+            double a, b;
+            b = st.top();
             st.pop();
-            double a = st.top();
+            a = st.top();
             st.pop();
 
-            switch (str[j]){
-                case '+':
-                    st.push(a + b);
-                    break;
-                case '-':
-                    st.push(a - b);
-                    break;
-                case '*':
-                    st.push(a * b);
-                    break;
-                case '/':
-                    st.push(a / b);
-                    break;
+            switch (str[i]){
+            case '+': st.push(a + b); break;
+            case '-': st.push(a - b); break;
+            case '*': st.push(a * b); break;
+            case '/': st.push(a /b ); break;
             }
-        } else{
-            st.push(str[j]=num);
+        } else {
+            st.push(vec[str[i] - 'A']);
         }
     }
-    }
-    double result = st.top();
+    cout << fixed;
+    cout.precision(2);
+    cout << st.top() << '\n';
 
-        cout << fixed;
-
-        cout.precision(2);
-
-        cout << result << "\n";
-
-        return 0;
-
+    return 0;
 }
