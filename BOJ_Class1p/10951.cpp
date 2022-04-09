@@ -7,9 +7,10 @@ int main(){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    while(1){
-        int a, b;
-        cin >> a >> b;
+    int a, b;
+    
+    while(cin >> a >> b){
+        
         cout << a + b << endl;
     }
     return 0;
