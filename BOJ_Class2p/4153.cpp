@@ -28,5 +28,5 @@ int main(){
             cout << "wrong" << '\n';
         }
     }
-    
+    return 0;
 }
