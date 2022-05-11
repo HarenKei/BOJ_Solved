@@ -9,50 +9,42 @@ int main(){
 
     stack<char> st;
     string str;
-    int val = 1;
-    int bigVal = 1;
-    int result = 0;
-
+    int tmp = 1, result = 0;
+    
     cin >> str;
 
     for(int i = 0; i < str.length(); i++){
-       if(str[i] == '('){
-           st.push(str[i]);
-           val *= 2;
-       } else if(str[i] == ')'){
-           if(str[i-1] == '('){
-               st.pop();
-               result += val;
-               val /= 2;
-           } else if(st.empty()){
-               result = 0;
-               break;
-           } else{
-               val /= 2;
-               st.pop();
-           }
-       } else if(str[i] == '['){
-           st.push(str[i]);
-           val *= 3;
-       } else if(str[i] == ']'){
-           if(str[i-1] == '['){
-               st.pop();
-               result += val;
-               val /= 3;
-           } else if(st.empty()){
-               result = 0;
-               break;
-           } else{
-               val /= 3;
-               st.pop();
-           }
-       }
+        if(str[i] == '('){
+            tmp *= 2;
+            st.push('(');
+        } else if(str[i] == '['){
+            tmp *= 3;
+            st.push('[');
+        } else if(str[i] == ')' && (st.top() != '(' || st.empty())){
+            result = 0;
+            break;
+        } else if(str[i] == ']' && (st.top() != '[' || st.empty())){
+            result = 0;
+            break;
+        } else if(str[i] == ')'){
+            if(str[i-1] == '('){
+                result += tmp;
+            }
+            st.pop();
+            tmp /= 2;
+        } else if(str[i] == ']'){
+            if(str[i-1] == '['){
+                result += tmp;
+            }
+            st.pop();
+            tmp /= 3;
+        }
     }
+              
+    if(!st.empty()) result = 0;
+    
+    cout << result << '\n';
 
-    if(st.empty())
-        result = 0;
-    else
-        cout << result << endl;
-
-    return 0;
 }
+    
+
