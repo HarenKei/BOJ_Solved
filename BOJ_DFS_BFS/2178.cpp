@@ -4,7 +4,7 @@ using namespace std;
 
 int n, m;
 vector<int> maze[101]; // 미로 저장용 벡터
-vector<bool> visited[101]; // 방문 체크용 벡터
+bool visited[101][101]; // 방문 체크용 배열
 queue< pair<int, int> > q; // 좌표값을 저장할 생각이기에 pair 템플릿
 vector<int> dist[101];
 
@@ -29,12 +29,6 @@ void BFS(int x, int y){
         int curY = q.front().second;
         q.pop();
 
-        cout << check(curX, curY - 1) << '\n';
-        cout << check(curX, curY + 1);
-        check(curX - 1, curY);
-        check(curX + 1,curY);
-
-        /*
         //상
         if(check(curX, curY - 1)){
             visited[curX][curY - 1] = true;
@@ -59,7 +53,6 @@ void BFS(int x, int y){
             q.push(make_pair(curX + 1, curY));
             dist[curX + 1][curY] = dist[x][y] + 1;
         }
-        */
     }
 
 }
@@ -80,7 +73,7 @@ int main(){
         }
     }
     
-    BFS(1, 1);
+    BFS(0, 0);
 
     cout << dist[n][m];
    
