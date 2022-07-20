@@ -2,14 +2,14 @@
 
 using namespace std;
 
-int n, m;
+int n, m; //n이 y축, m이 x축이다
 vector<int> maze[101]; // 미로 저장용 벡터
 bool visited[101][101]; // 방문 체크용 배열
 queue< pair<int, int> > q; // 좌표값을 저장할 생각이기에 pair 템플릿
-vector<int> dist[101];
+int dist[101][101];
 
 bool check(int x, int y){
-    if(y < 1 || y > n || x < 1 || x > m) //시작점보다 전이거나 도착점보다 뒤일때
+    if(y < 0 || y >= m || x < 0 || x >= n) //시작점보다 전이거나 도착점보다 뒤일때
         return false;
     if(visited[x][y]) //방문했을 때
         return false;
@@ -33,25 +33,25 @@ void BFS(int x, int y){
         if(check(curX, curY - 1)){
             visited[curX][curY - 1] = true;
             q.push(make_pair(curX, curY - 1));
-            dist[curX][curY - 1] = dist[x][y] + 1;
+            dist[curX][curY - 1] = dist[curX][curY]+1;
         }
         //하
         if(check(curX, curY + 1)){
             visited[curX][curY + 1] = true;
             q.push(make_pair(curX, curY + 1));
-            dist[curX][curY + 1] = dist[x][y] + 1;
+            dist[curX][curY + 1] = dist[curX][curY]+1;
         }
         //좌
         if(check(curX - 1, curY)){ 
             visited[curX - 1][curY] = true;
             q.push(make_pair(curX - 1, curY));
-            dist[curX - 1][curY] = dist[x][y] + 1;
+            dist[curX - 1][curY] = dist[curX][curY]+1;
         }
         //우
         if(check(curX + 1,curY)){
             visited[curX + 1][curY] = true;
             q.push(make_pair(curX + 1, curY));
-            dist[curX + 1][curY] = dist[x][y] + 1;
+            dist[curX + 1][curY] = dist[curX][curY]+1;
         }
     }
 
@@ -75,7 +75,7 @@ int main(){
     
     BFS(0, 0);
 
-    cout << dist[n][m];
+    cout << dist[n-1][m-1];
    
 
     return 0;
