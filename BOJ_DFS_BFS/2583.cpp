@@ -27,7 +27,7 @@ void BFS(int x, int y){
             int nextX = curX + dx[i];
             int nextY = curY + dy[i];
 
-            if(nextX < 0 || nextX > n || nextY < 0 || nextY > m) continue;
+            if(nextX < 0 || nextX >= n || nextY < 0 || nextY >= m) continue;
 
             if(!visited[nextX][nextY] && node[nextX][nextY] == 0){
                 areaCnt++;
@@ -53,17 +53,17 @@ int main(){
         for(int j = x1; j < x2; j++){ //좌표 A에서 B까지의 영역을 방문표시
             for(int k = y1; k < y2; k++){
                 node[j][k] = 1;
-                visited[j][k] = true;
             }
         }
     }
 
-    for(int i = n; i >= 0; i--){
-        for(int j = m; j >= 0; j--){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
             if(!visited[i][j] && node[i][j] == 0){
+                areaCnt = 0;
                 BFS(i, j);
                 area.push_back(areaCnt);
-                areaCnt = 0;
+                
             }
 
         }
