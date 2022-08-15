@@ -7,7 +7,6 @@ int n;
 int t[MAX];
 int p[MAX];
 int dp[MAX];
-int result = -1;
 
 
 int main(){
