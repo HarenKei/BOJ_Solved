@@ -3,10 +3,10 @@
 using namespace std;
 
 int n;
-int result = 1;
-priority_queue<int> pq1;
-priority_queue<int, vector<int>, greater<int>> pq2;
-vector<int> vec;
+int result;
+priority_queue<int> pq1; //양수는 내림차순
+priority_queue< int, vector<int>, greater<int> > pq2; //0, 음수는 오름차순 정렬
+
 
 int main(){
     ios::sync_with_stdio(false);
@@ -15,35 +15,40 @@ int main(){
 
     cin >> n;
 
-    for(int i = 0; i < n; i++){
+    while(n--){
         int num;
         cin >> num;
-        
-        if(num > 0){
-            pq1.push(num);
+
+        if(num > 0) pq1.push(num);
+        else pq2.push(num);
+    }
+
+    while(!pq1.empty()){
+        if(pq1.size() >= 2){
+            int topNum = pq1.top(); pq1.pop();
+            if(pq1.top() == 1){
+                result += (topNum + pq1.top()); pq1.pop();
+            } else{
+                result += (topNum * pq1.top()); pq1.pop();
+            }
         } else{
-            pq2.push(num);
+            result += pq1.top();
+            pq1.pop();
         }
     }
 
-    while(!pq1.empty()){ //양수부터 처리하자
-        int a = pq1.top();
-        pq1.pop();
-
-        result += (a * pq1.top());
-        pq1.pop();
-    }
-
     while(!pq2.empty()){
-        int a = pq1.top();
-        pq1.pop();
-
-        result += (a * pq2.top());
-        pq2.pop();
+        if(pq2.size() >= 2){
+            int topNum = pq2.top(); pq2.pop();
+            result += (topNum * pq2.top()); pq2.pop();
+        } else{
+            result += pq2.top();
+            pq2.pop();
+        }
     }
 
-    
     cout << result << '\n';
+    
 
     return 0;
 }
