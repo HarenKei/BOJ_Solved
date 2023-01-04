@@ -2,7 +2,12 @@
 
 using namespace std;
 
-int main() {
+int n;
+int alphabet[26];
+int cnt[3];
+string ans = "Not a pangram!";
+
+int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
