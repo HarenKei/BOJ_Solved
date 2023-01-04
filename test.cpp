@@ -2,45 +2,65 @@
 
 using namespace std;
 
-int n;
-int alphabet[26];
-int cnt[3];
-string ans = "Not a pangram!";
-
-int main(){
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    cin >> n;
+    int n, m;
+    int dnaCnt[51][4];
+    cin >> n >> m;
+    
+    for(int i = 0; i < n; i++){
+        string gene;
+        cin >> gene;
 
-    while(n--){
-        string str;
-        cin >> str;
 
-        transform(str.begin(), str.end(), str.begin(), [](unsigned char c){ return tolower(c); });
 
-        for(int i = 0; i < str.size(); i++){
-            alphabet[str[i]-97]++;
-        }
-
-        for(int i = 0; i < 26; i++){
-            for(int j = 0; j < alphabet[i]; j++){
-                if(alphabet[i] != 0){
-                    if(alphabet[i] >= 1){cnt[0]++;}
-                    if(alphabet[i] >= 2){cnt[1]++;}
-                    if(alphabet[i] >= 3){cnt[2]++;}
-                }
+        for(int j = 0; j < m; j++){
+            switch (gene[j])
+            {
+            case 'A':
+                dnaCnt[j][0]++;
+                break;
+            case 'C':
+                dnaCnt[j][1]++;
+                break;
+            case 'G':
+                dnaCnt[j][2]++;
+                break;
+            case 'T':
+                dnaCnt[j][3]++;
+                break;
             }
         }
-        //10384
+    }
 
-        if(cnt[0)
-        cout << cnt[0] << cnt[1] << cnt[2] << endl;
+    int ansCnt = 0;
+    string ans = "";
+
+    for(int i = 0; i < m; i++){
+        int idx = 0, maxCnt = 0;
+
+        for(int j = 0; j < 4; j++){
+            if(dnaCnt[i][j] > maxCnt){
+                idx = j;
+                maxCnt = dnaCnt[i][j];
+            }
+        }
+
+        cout << "idx : " << idx << endl;
+        cout << "maxCnt : " << maxCnt << endl;
+
+        ansCnt += (n - maxCnt);
+
+        cout << "ansCnt : " << ansCnt << endl;
 
         
     }
 
-
+    cout << ans << "\n";
+    cout << ansCnt << "\n";
+    
     return 0;
 }
