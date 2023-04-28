@@ -20,7 +20,7 @@ int main(){
 
     int sum = 0;
 
-    while(e < n) {
+    while(e <= n) {
         if(sum < m) {
             sum += v[e];
             e++;
