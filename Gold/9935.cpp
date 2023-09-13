@@ -4,7 +4,7 @@ using namespace std;
 
 string target;
 string bomb;
-string ans = "";
+string ans;
 
 int main() {
     ios::sync_with_stdio(false);
@@ -13,8 +13,8 @@ int main() {
 
     cin >> target >> bomb;
 
-    for(int i = 0; i < target.length(); i++) {
-        ans += target[i];
+    for(char i : target) {
+        ans += i;
 
         if(ans.back() == bomb.back()) {
             if(ans.length() < bomb.length()) continue;
