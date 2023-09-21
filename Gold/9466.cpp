@@ -1,57 +1,82 @@
 #include <bits/stdc++.h>
-
 #define MAX 100001
+#define INF 987654321
 
 using namespace std;
 
-int node[MAX];
-int visited[MAX] = {-1};
-bool finished[MAX];
-int t, ans, depth;
+int n, m;
+int start, dest;
+vector<pair<int, int>> MAP[MAX];
+vector<int> result;
+priority_queue<pair<int, int>> pq;
+int dist[1001];
+int route[1001];
+vector<int> ans;
 
-void DFS(int vertex) {
-
-    visited[vertex] = depth++;
-    int nxt = node[vertex];
-
-    if(visited[nxt] == -1) {
-        DFS(nxt);
-    } else if(!finished[nxt]) {
-        ans += visited[vertex] - visited[nxt] + 1;
+void dijkstra() {
+    for(int i = 1; i <= n; i++) {
+        dist[i] = INF;
     }
 
-    finished[vertex] = true;
-}
+    dist[start] = 0;
+    pq.push({0, start});
+    ans.push_back(start);
 
+    while(!pq.empty()) {
+        int curNode = pq.top().second;
+        int curCost = -pq.top().first;
+        pq.pop();
+
+        if(dist[curNode] < curCost) continue;
+
+        for(int i = 0; i < MAP[curNode].size(); i++) {
+            int nxtNode = MAP[curNode][i].first;
+            int nxtCost = curCost + MAP[curNode][i].second;
+
+            if(dist[nxtNode] > nxtCost) {
+                route[nxtNode] = curNode;
+                dist[nxtNode] = nxtCost;
+                pq.push({-nxtCost, nxtNode});
+            }
+        }
+    }
+}
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    cin >> t;
+    cin >> n >> m;
 
-    while (t--) {
-        int n;
-        cin >> n;
-
-        memset(visited, -1, sizeof(visited));
-        memset(finished, false, sizeof(finished));
-        ans = 0;
-
-        for (int i = 1; i <= n; i++) {
-            cin >> node[i];
-        }
-
-        for (int i = 1; i <= n; i++) {
-            if (visited[i] == -1) {
-                DFS(i);
-
-            }
-        }
-
-        cout << n - ans << "\n";
+    for(int i = 0; i < m; i++) {
+        int s, e, c;
+        cin >> s >> e >> c;
+        MAP[s].push_back({e, c});
     }
+
+    cin >> start >> dest;
+
+    dijkstra();
+
+    int idx = dest;
+    while(1) {
+        if(route[idx] == 0) {
+            result.push_back(start);
+            break;
+        }
+        result.push_back(idx);
+        idx = route[idx];
+    }
+
+    reverse(result.begin(), result.end());
+    cout << dist[dest] << "\n";
+    cout << result.size() << "\n";
+
+    for(auto i : result) {
+        cout << i << " ";
+    }
+    cout << "\n";
 
     return 0;
 }
