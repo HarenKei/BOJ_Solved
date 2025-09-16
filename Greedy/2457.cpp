@@ -5,9 +5,7 @@ using namespace std;
 //기준 301, 1130
 int n; //꽃의 개수
 vector< pair<int, int> > flower;
-int chkTime;
-int ans;
-int cnt;
+int flowerStart, flowerEnd;
 
 
 int main(){
@@ -24,13 +22,21 @@ int main(){
     
     sort(flower.begin(), flower.end()); //피는 날 기준 정렬
 
-    if(flower[0].first > 301){
-        cout << 0 << '\n';
-        return 0;
+    flowerEnd = 301;
+
+    int i = 1, cnt = 0;
+
+    while((flowerEnd <= 1130) && i < n){
+        if(flowerEnd <= flower[i].first){
+            cnt++;
+            flowerEnd = flower[i].second;
+        }
+        i++;
     }
 
-    
+    cout << cnt << endl;
 
-    cout <<  cnt << '\n';
+    return 0;
+
 
 }

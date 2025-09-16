@@ -2,70 +2,33 @@
 
 using namespace std;
 
-int n;
-int alphabet[26];
-int cnt[3];
-string ans = "Not a pangram!";
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n, m;
-    int dnaCnt[51][4];
-    cin >> n >> m;
-    
-    for(int i = 0; i < n; i++){
-        string gene;
-        cin >> gene;
+   int n, m;
+   int dp[1025][1025] = {};
+   cin >> n >> m;
 
-
-
-        for(int j = 0; j < m; j++){
-            switch (gene[j])
-            {
-            case 'A':
-                dnaCnt[j][0]++;
-                break;
-            case 'C':
-                dnaCnt[j][1]++;
-                break;
-            case 'G':
-                dnaCnt[j][2]++;
-                break;
-            case 'T':
-                dnaCnt[j][3]++;
-                break;
-            }
-        }
+   for(int i = 1; i <= n; i++) {
+    for(int j = 1; j <= n; j++) {
+        int input;
+        cin >> input;
+        dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + input;
     }
+   }
 
-    int ansCnt = 0;
-    string ans = "";
 
-    for(int i = 0; i < m; i++){
-        int idx = 0, maxCnt = 0;
+   for(int i = 0; i < m; i++) {
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
 
-        for(int j = 0; j < 4; j++){
-            if(dnaCnt[i][j] > maxCnt){
-                idx = j;
-                maxCnt = dnaCnt[i][j];
-            }
-        }
+    int result = dp[x2][y2] - dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1-1][y1-1];
 
-        cout << "idx : " << idx << endl;
-        cout << "maxCnt : " << maxCnt << endl;
+    cout << result << "\n";
+   }
 
-        ansCnt += (n - maxCnt);
 
-        cout << "ansCnt : " << ansCnt << endl;
-
-        
-    }
-
-    cout << ans << "\n";
-    cout << ansCnt << "\n";
-    
     return 0;
 }

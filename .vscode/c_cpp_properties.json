@@ -11,8 +11,8 @@
             ],
             "compilerPath": "/Library/Developer/CommandLineTools/usr/bin/g++",
             "cStandard": "c11",
-            "cppStandard": "c++98",
-            "intelliSenseMode": "macos-clang-x64"
+            "cppStandard": "c++17",
+            "intelliSenseMode": ["-std=c++17", "-stdlib=libc++"]
         }
     ],
     "version": 4
