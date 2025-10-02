@@ -1,14 +1,12 @@
-n = int(input())
-winnerScore = 0
+winner = 0
 
-for i in range(n):
-    scoreList = list(map(int, input().split()))
-    runScoreList = scoreList[:2]
-    trickScoreList = scoreList[2:]
-    runScoreList.sort(reverse=True)
-    trickScoreList.sort(reverse=True)
-    winnerScore = max(winnerScore, (runScoreList[0] + trickScoreList[0] + trickScoreList[1]))
+for _ in range(int(input())):
+  scores = list(map(int, input().split()))
+  run, trick = scores[:2], scores[2:]
 
-print(winnerScore)
+  run.sort(reverse=True)
+  trick.sort(reverse=True)
 
+  winner = max(winner, (run[0] + trick[0] + trick[1]))
 
+print(winner)
